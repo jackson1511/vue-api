@@ -1,17 +1,21 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
+import { jwtDecode } from 'jwt-decode'
 
 // Define the Auth store using Pinia
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: {} || null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null, // Store token in localStorage for persistence
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem('authenticated'),
   }),
 
   getters: {
-    // Check if the user is authenticated
-    isLoggedIn: (state) => !!state.token,
+    // Check if the user is authenticated and token is not expired
+    isLoggedIn: (state) => {
+      // Check if token exists and is valid (not expired)
+      return !!state.token && !state.checkTokenExpiration(state.token)
+    },
     /**
      * This code defines a getter named isLoggedIn in a Pinia store.
      * It checks if the user is authenticated by verifying the presence of a token in the store's state.
@@ -30,13 +34,19 @@ export const useAuthStore = defineStore('auth', {
           password,
         })
 
+        const { user, token } = response.data
+
         // Store the token and user data in state
-        this.token = response.data.token
-        this.user = response.data.user 
+        this.token = token
+        this.user = user
         this.isAuthenticated = true
 
         // Save token to localStorage to persist login state
-        localStorage.setItem('token', this.token)
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('authenticated', true)
+
+        console.log('user', user)
       } catch (error) {
         console.error('Login error:', error)
         this.isAuthenticated = false
@@ -47,10 +57,34 @@ export const useAuthStore = defineStore('auth', {
 
     // Logout action
     logout() {
+      // Reset store state
       this.token = null
       this.user = null
       this.isAuthenticated = false
+
+      // Remove token from localStorage
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      localStorage.removeItem('authenticated')
+    },
+
+    // Token Expiration
+    checkTokenExpiration(token) {
+      if (!token) return true // If no token, treat it as expired
+
+      try {
+        const decodedToken = jwtDecode(token)
+        const currentTime = Date.now() / 1000 // Get current time in seconds
+        if (decodedToken.exp < currentTime) {
+          // Token has expired
+          this.logout() // Optionally logout if expired
+          return true
+        }
+        return false
+      } catch (error) {
+        console.error('Token decoding error:', error)
+        return true // In case of error, consider it expired
+      }
     },
   },
 })
