@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 // Define the Auth store using Pinia
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: {} || null,
     token: localStorage.getItem('token') || null, // Store token in localStorage for persistence
     isAuthenticated: false,
   }),
@@ -23,16 +23,16 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     // Login action
-    async login(username, password) {
+    async login(email, password) {
       try {
-        const response = await axios.post('http://localhost:3000/login', {
-          username,
+        const response = await axios.post('http://localhost:5000/api/v1/login', {
+          email,
           password,
         })
 
         // Store the token and user data in state
         this.token = response.data.token
-        this.user = { username } // You can also fetch user info from the server
+        this.user = response.data.user 
         this.isAuthenticated = true
 
         // Save token to localStorage to persist login state

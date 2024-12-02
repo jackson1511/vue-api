@@ -4,8 +4,8 @@
     <button @click="login">login</button>
     <form @submit.prevent="handleLogin">
       <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" required />
+        <label for="email">Email:</label>
+        <input type="text" id="email" v-model="email" required />
       </div>
       <div>
         <label for="password">Password:</label>
@@ -13,6 +13,8 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <button @click="handleLogout">Logout</button>
+
   </main>
 </template>
 
@@ -20,12 +22,12 @@
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth.js'
 
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const authStore = useAuthStore()
 
 const handleLogin = async () => {
-  await authStore.login(username.value, password.value)
+  await authStore.login(email.value, password.value)
   if (authStore.isAuthenticated) {
     // Redirect to a protected page after login
     console.log('Logged in successfully')
@@ -35,19 +37,7 @@ const handleLogin = async () => {
   }
 }
 
-import axios from 'axios'
-
-const login = async () => {
-  try {
-    const response = await axios.post('http://localhost:3000/login', {
-      username: 'user1',
-      password: 'password123',
-    })
-
-    console.log(response.data) // Handle successful login
-    localStorage.setItem('token', response.data.token) // Save token to localStorage
-  } catch (error) {
-    console.error('Login failed:', error.response?.data?.message || error)
-  }
+const handleLogout = async () =>{
+  authStore.logout();
 }
 </script>
