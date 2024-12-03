@@ -12,13 +12,14 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <router-link to="/register"> Register </router-link>
   </main>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../../stores/auth.js'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
 
 const email = ref('')
 const password = ref('')

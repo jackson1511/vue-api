@@ -5,6 +5,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import LoginView from '@/views/auth/LoginView.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
+import RegisterView from '@/views/auth/RegisterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,12 @@ const router = createRouter({
       meta: { layout: 'AuthLayout' },
     },
     {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+      meta: { layout: 'AuthLayout', requiresAuth: false },
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: PageNotFound,
@@ -39,10 +46,15 @@ const router = createRouter({
 // Global route guard
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('token') // Check if the user is authenticated
-  if (to.path !== '/login' && !isAuthenticated) {
-    next('/login') // Redirect to login page if not authenticated
+  // Allow navigation to login or register page if not authenticated
+  if ((to.path === '/login' || to.path === '/register') && isAuthenticated) {
+    // Redirect to home or other protected page if user is authenticated
+    next({ name: 'home' })
+  } else if (to.path !== '/login' && to.path !== '/register' && !isAuthenticated) {
+    // Redirect to login page if the user is not authenticated and tries to access a protected page
+    next('/login')
   } else {
-    next() // Allow navigation
+    next() // Allow navigation for all other cases
   }
 })
 
