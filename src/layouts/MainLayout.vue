@@ -8,9 +8,10 @@
         <ul class="nav-links">
           <li><router-link to="/" class="nav-link">Home</router-link></li>
           <li><router-link to="/post" class="nav-link">Posts</router-link></li>
+          <li><router-link to="/storage" class="nav-link">Storage</router-link></li>
         </ul>
         <div class="auth-actions">
-          <button @click="hanldeLogout" class="logout-btn">Logout</button>
+          <button @click="handleLogout" class="logout-btn">Logout</button>
         </div>
       </nav>
     </header>
@@ -31,7 +32,7 @@ defineComponent({
   name: 'MainLayout',
 })
 
-const hanldeLogout = async () => {
+const handleLogout = async () => {
   authStore.logout()
   router.push('/login')
 }
