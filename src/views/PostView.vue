@@ -1,43 +1,29 @@
 <template>
   <div>
     <button @click="fetchData">fetch data</button>
-    <div>
-      <p v-if="loading">Loading...</p>
-      <p v-if="error">Error: {{ error }}</p>
+    <div v-if="data">
+      <pre>{{ data.msg }}</pre>
+      <!-- Displays the fetched data -->
     </div>
   </div>
 </template>
 <script setup>
-import { useAuthStore } from '@/stores/auth'
-import axios from 'axios'
-import { ref } from 'vue'
+import { usePost } from '@/components/usePost'
+const { getData, data } = usePost()
 
-// create reactive state variable
-const data = ref([])
-const loading = ref(false)
-const error = ref(null)
-const authStore = useAuthStore()
-
-// fetch data from API
 const fetchData = async () => {
-  if (authStore.checkTokenExpiration(authStore.token)) {
-    // If the token is expired, redirect the user to login or log them out
-    authStore.logout()
-    console.log('Token expired, logging out...')
-    return // Stop the API request
-  }
   try {
-    loading.value = true
-    const response = await axios.get('http://localhost:5000/api/v1/dashboards', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`, // Set the Bearer token in the Authorization header
-      },
-    })
-    console.log(response)
-  } catch (err) {
-    error.value = err
-  } finally {
-    loading.value = false
+    /**
+     * response :
+     * + string
+     * + object : {'msg': 'value'}
+     * + array : [{id:1, name:'value'}, {id:2, name:'value'}]
+     */
+    await getData()
+    // Store the response data in the reactive variable
+    // data.value = response.msg
+  } catch (error) {
+    console.error('Error fetching data:', error) // Error handling
   }
 }
 </script>
