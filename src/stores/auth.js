@@ -45,6 +45,7 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
         localStorage.setItem('authenticated', true)
+        localStorage.setItem('roles', JSON.stringify(user.role))
 
         console.log('user', user)
       } catch (error) {
@@ -84,6 +85,20 @@ export const useAuthStore = defineStore('auth', {
       } catch (error) {
         console.error('Token decoding error:', error)
         return true // In case of error, consider it expired
+      }
+    },
+
+    // Change password action
+    async changePassword(oldPassword, newPassword, confirmPassword) {
+      try {
+        const response = await axios.patch('http://localhost:5000/api/v1/users/setting-password', {
+          oldPassword,
+          newPassword,
+          confirmPassword,
+        })
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
       }
     },
   },

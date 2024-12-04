@@ -8,7 +8,7 @@
   </div>
 </template>
 <script setup>
-import { usePost } from '@/components/usePost'
+import { usePost } from '@/composables/usePost'
 const { getData, data } = usePost()
 
 const fetchData = async () => {

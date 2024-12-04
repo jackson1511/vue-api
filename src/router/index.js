@@ -1,11 +1,9 @@
+import PageNotFound from '@/views/PageNotFound.vue'
 import PostView from '@/views/PostView.vue'
+import LoginView from '@/views/auth/LoginView.vue'
+import RegisterView from '@/views/auth/RegisterView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MainLayout from '@/layouts/MainLayout.vue'
-import LoginView from '@/views/auth/LoginView.vue'
-import AuthLayout from '@/layouts/AuthLayout.vue'
-import PageNotFound from '@/views/PageNotFound.vue'
-import RegisterView from '@/views/auth/RegisterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +19,18 @@ const router = createRouter({
       name: 'posts',
       component: PostView,
       meta: { layout: 'MainLayout' },
+    },
+    {
+      path: '/todos',
+      name: 'todos',
+      component: () => import('@/views/TodoView.vue'),
+      meta: { layout: 'MainLayout', requiresAuth: true },
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/SettingView.vue'),
+      meta: { layout: 'MainLayout', requiresAuth: true },
     },
     {
       path: '/login',

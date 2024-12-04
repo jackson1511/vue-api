@@ -21,4 +21,18 @@ axiosInstance.interceptors.request.use(
   },
 )
 
+// Response interceptor to catch 403 errors
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if (error.response && error.response.status === 403) {
+      alert('Access Forbidden: 403')
+      // You can handle the 403 error here, like redirecting to a login page
+    }
+    return Promise.reject(error)
+  },
+)
+
 export default axiosInstance

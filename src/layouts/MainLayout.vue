@@ -8,7 +8,14 @@
         <ul class="nav-links">
           <li><router-link to="/" class="nav-link">Home</router-link></li>
           <li><router-link to="/post" class="nav-link">Posts</router-link></li>
+          <li><router-link to="/todos" class="nav-link">Todos</router-link></li>
+          <li><router-link to="/setting" class="nav-link">Settings</router-link></li>
         </ul>
+        <div>
+          <!-- role === 'admin' ? 'admin' : '' -->
+          <div v-for="role in roles" :key="role"></div>
+          <!-- <p>{{ user.username }}</p> -->
+        </div>
         <div class="auth-actions">
           <button @click="hanldeLogout" class="logout-btn">Logout</button>
         </div>
@@ -22,8 +29,11 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+const user = ref({})
+const roles = JSON.parse(localStorage.getItem('roles'))
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -35,6 +45,10 @@ const hanldeLogout = async () => {
   authStore.logout()
   router.push('/login')
 }
+
+onMounted(() => {
+  user.value = JSON.parse(localStorage.getItem('user'))
+})
 </script>
 
 <style scoped>
