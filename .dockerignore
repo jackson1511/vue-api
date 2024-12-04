@@ -1,0 +1,32 @@
+# Node modules - no need to copy them, we'll install them inside the container
+node_modules
+
+# Build artifacts from previous builds (we will run the build process in Docker)
+dist
+build
+
+# IDE/editor config files
+.vscode
+.idea
+
+# Local environment configuration files
+.env.local
+.env.development.local
+.env.production.local
+
+# Logs
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Git directories and files
+.git
+.gitignore
+
+# Docker files (optional, if you don't want Dockerfile in the build context)
+Dockerfile
+
+# Other files to exclude
+*.md
