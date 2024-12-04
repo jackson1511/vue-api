@@ -87,19 +87,5 @@ export const useAuthStore = defineStore('auth', {
         return true // In case of error, consider it expired
       }
     },
-
-    // Change password action
-    async changePassword(oldPassword, newPassword, confirmPassword) {
-      try {
-        const response = await axios.patch('http://localhost:5000/api/v1/users/setting-password', {
-          oldPassword,
-          newPassword,
-          confirmPassword,
-        })
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
-      }
-    },
   },
 })
