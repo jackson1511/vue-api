@@ -9,6 +9,7 @@
           <li><router-link to="/" class="nav-link">Home</router-link></li>
           <li><router-link to="/todos" class="nav-link">Todos</router-link></li>
           <li><router-link to="/setting" class="nav-link">Settings</router-link></li>
+          <li><router-link to="/game" class="nav-link">Game</router-link></li>
         </ul>
         <div>
           <!-- role === 'admin' ? 'admin' : '' -->

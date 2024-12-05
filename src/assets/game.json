@@ -1,0 +1,152 @@
+{
+  "sports": [
+    {
+      "word": "Athlete",
+      "definition": "A person who competes in one or more sports that require physical strength, speed, or endurance."
+    },
+    {
+      "word": "Goal",
+      "definition": "The act of scoring in a game by sending a ball or puck into the opposing team's net."
+    },
+    { "word": "Team", "definition": "A group of players forming one side in a competitive game." },
+    {
+      "word": "Coach",
+      "definition": "A person responsible for training and instructing athletes or teams."
+    },
+    { "word": "Victory", "definition": "The act of winning a game, competition, or battle." },
+    { "word": "Defeat", "definition": "The loss of a game or competition." },
+    {
+      "word": "Champion",
+      "definition": "A person who has defeated all competitors in a sport or competition."
+    },
+    {
+      "word": "Competition",
+      "definition": "An event or contest in which individuals or teams compete against each other."
+    },
+    { "word": "Match", "definition": "A single contest or game between two teams or individuals." },
+    { "word": "Score", "definition": "The number of points or goals achieved in a game." },
+    {
+      "word": "Referee",
+      "definition": "An official who oversees the rules and fairness of a game."
+    },
+    { "word": "Foul", "definition": "An action in a game that is against the rules." },
+    {
+      "word": "Penalty",
+      "definition": "A punishment given for committing a foul, often resulting in a free kick or loss of points."
+    },
+    {
+      "word": "Time-out",
+      "definition": "A short break taken during a game to allow rest or strategy discussion."
+    },
+    {
+      "word": "Quarter",
+      "definition": "A period of play in some sports, typically one of four parts of a game."
+    },
+    {
+      "word": "Endurance",
+      "definition": "The ability to endure or sustain prolonged physical or mental effort."
+    },
+    {
+      "word": "Strength",
+      "definition": "The quality of being physically strong, important in many sports."
+    },
+    {
+      "word": "Speed",
+      "definition": "The ability to move quickly, crucial in many sports like running and cycling."
+    },
+    {
+      "word": "Stamina",
+      "definition": "The ability to sustain prolonged physical or mental effort, often needed in endurance sports."
+    },
+    {
+      "word": "Dribble",
+      "definition": "To control and move the ball with repeated taps using your feet or hands."
+    },
+    { "word": "Pass", "definition": "To send the ball to a teammate." },
+    {
+      "word": "Shoot",
+      "definition": "To attempt to score by sending the ball into the goal or basket."
+    },
+    {
+      "word": "Tackle",
+      "definition": "To stop an opponent by using physical force to take the ball away."
+    },
+    { "word": "Substitute", "definition": "A player who replaces another during the game." },
+    { "word": "Rival", "definition": "An opponent in a competition." },
+    { "word": "Tournament", "definition": "A series of contests in a particular sport or game." },
+    {
+      "word": "League",
+      "definition": "A group of teams or individuals competing against each other in a specific sport."
+    },
+    {
+      "word": "Season",
+      "definition": "A specific period during which a sport or competition is played."
+    },
+    { "word": "Player", "definition": "An individual who participates in a sport or game." },
+    {
+      "word": "Goalkeeper",
+      "definition": "A player whose primary role is to prevent the opposing team from scoring."
+    },
+    { "word": "Striker", "definition": "A player whose main role is to score goals in a game." },
+    {
+      "word": "Midfielder",
+      "definition": "A player who plays between the defenders and attackers, helping both defense and offense."
+    },
+    {
+      "word": "Defender",
+      "definition": "A player whose primary responsibility is to protect the goal and prevent the opposing team from scoring."
+    },
+    { "word": "Assist", "definition": "A pass that leads directly to a goal being scored." },
+    {
+      "word": "Fitness",
+      "definition": "The condition of being physically healthy and strong, often important for athletes."
+    },
+    {
+      "word": "Warm-up",
+      "definition": "Exercises performed before a game or activity to prepare the body."
+    },
+    {
+      "word": "Cool-down",
+      "definition": "Light exercise after a workout or game to reduce muscle soreness."
+    },
+    {
+      "word": "Spectator",
+      "definition": "A person who watches a game or event but does not participate."
+    },
+    { "word": "Venue", "definition": "The location where a sports event takes place." },
+    {
+      "word": "Record",
+      "definition": "The best performance or achievement in a particular sport or event."
+    },
+    {
+      "word": "Personal best",
+      "definition": "The best performance an athlete has achieved in their career."
+    },
+    { "word": "Injury", "definition": "Physical harm or damage sustained during a sport." },
+    { "word": "Treatment", "definition": "Medical care given to an injured player." },
+    {
+      "word": "Recovery",
+      "definition": "The process of regaining strength or health after injury or exertion."
+    },
+    {
+      "word": "Fitness test",
+      "definition": "An assessment used to measure an athlete's physical abilities."
+    },
+    {
+      "word": "Warm-up",
+      "definition": "Low-intensity exercises done before engaging in physical activity to prevent injury."
+    },
+    {
+      "word": "Stretching",
+      "definition": "The act of extending muscles to increase flexibility before or after exercise."
+    },
+    {
+      "word": "Matchday",
+      "definition": "The day on which a scheduled sports event or game takes place."
+    },
+    {
+      "word": "Playbook",
+      "definition": "A book or collection of strategies and tactics used by a team or coach."
+    }
+  ]
+}

@@ -26,6 +26,12 @@ const router = createRouter({
       meta: { layout: 'MainLayout', requiresAuth: true },
     },
     {
+      path: '/game',
+      name: 'game',
+      component: () => import('@/views/GameView.vue'),
+      meta: { layout: 'MainLayout', requiresAuth: true },
+    },
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
