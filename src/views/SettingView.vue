@@ -36,7 +36,7 @@ import { useSetting } from '@/composables/useSetting'
 import { ref } from 'vue'
 
 const user = JSON.parse(localStorage.getItem('user'))
-const roles = JSON.parse(localStorage.getItem('roles'))
+const roles = user.role
 
 const { changePassword } = useSetting()
 

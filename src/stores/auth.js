@@ -15,16 +15,8 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     // Check if the user is authenticated and token is not expired
     isLoggedIn: (state) => {
-      // Check if token exists and is valid (not expired)
       return !!state.token && !state.checkTokenExpiration(state.token)
     },
-    /**
-     * This code defines a getter named isLoggedIn in a Pinia store.
-     * It checks if the user is authenticated by verifying the presence of a token in the store's state.
-     * The !! operator converts the token value to a boolean,
-     * => where null or undefined becomes false and any other value becomes true.
-     *
-     */
   },
 
   actions: {
@@ -37,9 +29,7 @@ export const useAuthStore = defineStore('auth', {
           email,
           password,
         })
-
         const { user, token } = response.data
-
         // Store the token and user data in state
         this.token = token
         this.user = user
@@ -48,8 +38,12 @@ export const useAuthStore = defineStore('auth', {
         // Save token to localStorage to persist login state
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
-        localStorage.setItem('authenticated', true)
-        localStorage.setItem('roles', JSON.stringify(user.role))
+
+        // Store the 'authenticated' flag as a string
+        localStorage.setItem('authenticated', 'true') // Storing as string for consistency
+
+        // Store roles as a JSON string (to handle multiple roles)
+        // localStorage.setItem('roles', JSON.stringify(user.role))
         return response
       } catch (error) {
         // Enhanced error handling
@@ -92,8 +86,9 @@ export const useAuthStore = defineStore('auth', {
         const decodedToken = jwtDecode(token)
         const currentTime = Date.now() / 1000 // Get current time in seconds
         if (decodedToken.exp < currentTime) {
-          // Token has expired
-          this.logout() // Optionally logout if expired
+          // Handle token expiration: Log out the user or refresh token
+          localStorage.clear()
+          this.isAuthenticated = false
           return true
         }
         return false
