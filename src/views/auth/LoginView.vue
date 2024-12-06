@@ -2,6 +2,7 @@
   <main class="login-container">
     <div class="login-box">
       <h1 class="login-title">Login</h1>
+      <p v-if="authStore.loading">Loading...</p>
       <form @submit.prevent="handleLogin" class="login-form">
         <div class="input-group">
           <label for="email" class="input-label">Email:</label>
@@ -10,6 +11,16 @@
         <div class="input-group">
           <label for="password" class="input-label">Password:</label>
           <input type="password" id="password" v-model="password" class="input-field" required />
+        </div>
+        <div v-if="authStore.error" class="input-group">
+          <input
+            type="text"
+            class="input-field"
+            required
+            :value="authStore.error"
+            style="color: gainsboro; background-color: red; cursor: no-drop"
+            disabled
+          />
         </div>
         <button type="submit" class="submit-btn">Login</button>
       </form>
@@ -31,15 +42,13 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const handleLogin = async () => {
-  await authStore.login(email.value, password.value)
-  if (authStore.isAuthenticated) {
-    // Redirect to a protected page after login
-    console.log('Logged in successfully')
-    // You can use Vue Router to redirect here
+  const response = await authStore.login(email.value, password.value)
+  if (response) {
     router.push('/')
-  } else {
-    console.error('Login failed')
   }
+
+  email.value = ''
+  password.value = ''
 }
 </script>
 

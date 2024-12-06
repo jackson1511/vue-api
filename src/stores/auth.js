@@ -5,6 +5,8 @@ import { defineStore } from 'pinia'
 // Define the Auth store using Pinia
 export const useAuthStore = defineStore('auth', {
   state: () => ({
+    loading: false,
+    error: null,
     user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null, // Store token in localStorage for persistence
     isAuthenticated: localStorage.getItem('authenticated'),
@@ -28,6 +30,8 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     // Login action
     async login(email, password) {
+      this.loading = true
+      this.error = null
       try {
         const response = await axios.post('http://localhost:5000/api/v1/login', {
           email,
@@ -46,13 +50,24 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('user', JSON.stringify(user))
         localStorage.setItem('authenticated', true)
         localStorage.setItem('roles', JSON.stringify(user.role))
-
-        console.log('user', user)
+        return response
       } catch (error) {
-        console.error('Login error:', error)
+        // Enhanced error handling
+        if (error.response) {
+          this.error = error.response.data.message || 'Something went wrong!'
+        } else {
+          this.error = error.message || 'An unknown error occurred'
+        }
+
+        // Clear localStorage and reset authentication state
         this.isAuthenticated = false
         this.token = null
         localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('authenticated')
+        localStorage.removeItem('roles')
+      } finally {
+        this.loading = false
       }
     },
 
