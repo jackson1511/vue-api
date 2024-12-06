@@ -41,7 +41,13 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: PageNotFound,
-      meta: { layout: 'auth' }, // or 'master', depending on the layout you want for the 404 page
+      meta: { layout: 'MainLayout' }, // or 'master', depending on the layout you want for the 404 page
+    },
+    {
+      path: '/no-access',
+      name: 'no-access',
+      component: () => import('@/views/NoAccess.vue'),
+      meta: { layout: 'MainLayout' }, // or 'master', depending on the layout you want for the 404 page
     },
   ],
 })

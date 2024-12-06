@@ -30,6 +30,7 @@ axiosInstance.interceptors.response.use(
     if (error.response && error.response.status === 403) {
       alert('Access Forbidden: 403')
       // You can handle the 403 error here, like redirecting to a login page
+      window.location.href = '/no-access'
     }
     return Promise.reject(error)
   },
